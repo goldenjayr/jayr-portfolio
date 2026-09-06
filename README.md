@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jay-R Joseph Gabunada — Portfolio
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 · React 19 · TypeScript · Tailwind v4 · Motion.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where the content lives
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything is in **`src/lib/data.ts`** — one file, no CMS. Edit that and the whole
+site updates: bio, stats, projects, case studies, experience, skills, links.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚠️ Verify before you publish
 
-## Learn More
+The numbers came from your actual repos (`git shortlog`, GitHub API), so they're
+real. Two things are **inferred** and you should correct them:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Job titles** in `experience` — I guessed "Senior Full-Stack Engineer" and
+   "Software Engineer — 3D & Platform". Use your real titles.
+2. **Date ranges** — derived from first/last commit dates, not your actual
+   start/end dates. The 2018–2022 "Independent & agency work" entry is the
+   roughest; if you were at a named company (DNA Micro?), name it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Also update `SITE` in `src/app/layout.tsx` to your real domain before deploying,
+or Open Graph images and the canonical URL will point at a placeholder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Stats provenance
 
-## Deploy on Vercel
+| Number | Source |
+|---|---|
+| 1,128 commits to ThorneAI | `git shortlog -sn --all` in `MyThorneAI` |
+| 6,799 total repo commits | `git rev-list --count --all` |
+| 484 commits, church platform | `git log --author=Gabunada` |
+| 118 / 488 commits, 23point5 upload API | same |
+| 125 commits, interview platform | same |
+| 66 public repos | GitHub API |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx vercel --prod
+```
