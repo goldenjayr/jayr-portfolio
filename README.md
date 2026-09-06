@@ -24,8 +24,10 @@ real. Two things are **inferred** and you should correct them:
    start/end dates. The 2018–2022 "Independent & agency work" entry is the
    roughest; if you were at a named company (DNA Micro?), name it.
 
-Also update `SITE` in `src/app/layout.tsx` to your real domain before deploying,
-or Open Graph images and the canonical URL will point at a placeholder.
+The site origin resolves itself: on Vercel it uses `VERCEL_PROJECT_PRODUCTION_URL`,
+locally it uses `localhost:3000`. When you point a custom domain at this project,
+set `NEXT_PUBLIC_SITE_URL=https://yourdomain.com` in the Vercel project's
+environment variables so canonical URLs, Open Graph and the sitemap follow it.
 
 ## Stats provenance
 
