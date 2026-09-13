@@ -48,6 +48,7 @@ export type Project = {
   stack: string[];
   metrics: { value: string; label: string }[];
   href?: string;
+  thumb?: string;
   repo?: string;
   accent: string;
 };
@@ -149,6 +150,8 @@ export const projects: Project[] = [
       { value: "3", label: "languages, in-browser" },
       { value: "0", label: "execution servers" },
     ],
+    href: "https://code.dongje.app",
+    thumb: "/shots/interview-platform.jpg",
     repo: "https://github.com/goldenjayr/junior-exam",
   },
   {
@@ -170,6 +173,8 @@ export const projects: Project[] = [
       { value: "51", label: "commits" },
       { value: "Hands-free", label: "primary input" },
     ],
+    href: "https://poultry.dongje.app",
+    thumb: "/shots/poultry-farm.jpg",
     repo: "https://github.com/goldenjayr/poultry-farm",
   },
   {
@@ -193,6 +198,118 @@ export const projects: Project[] = [
       { value: "Anti-aliased", label: "edge quality" },
     ],
     repo: "https://github.com/goldenjayr/background-remover",
+  },
+  {
+    slug: "house-plan",
+    name: "Hillside Sari-Sari House",
+    kind: "Architectural portal · WebGL",
+    year: "2026",
+    accent: "#d8b48a",
+    href: "https://house.dongje.app",
+    thumb: "/shots/house-plan.jpg",
+    summary:
+      "A real-time 3D walkthrough of a house design — first-person navigation with stair and collision physics, seventeen curated camera views, and a dimensioned plan and MEP gallery alongside it.",
+    problem:
+      "Floor plans and static renders don't tell you what a room feels like to stand in, and the people approving a build are rarely the people who can read a section drawing.",
+    approach: [
+      "Built the walkthrough on Three.js with WASD first-person movement, real stair traversal and collision, so the space is explored rather than orbited.",
+      "Added dynamic sun and night lighting with warm interior fixtures, and two quality modes — 60fps interactive, and a cinematic GTAO pass for stills.",
+      "Paired it with a render and MEP gallery: ground/upper/rooftop floor plans, mechanical, electrical and plumbing schematics, and a fullscreen lightbox for detail inspection.",
+    ],
+    stack: ["Three.js", "WebGL", "TypeScript", "Next.js", "GTAO"],
+    metrics: [
+      { value: "17", label: "camera views" },
+      { value: "60", label: "fps interactive" },
+      { value: "3", label: "levels modelled" },
+    ],
+  },
+  {
+    slug: "glu-study",
+    name: "GLU Study",
+    kind: "Study guide platform",
+    year: "2026",
+    accent: "#c9a227",
+    href: "https://study.dongje.app",
+    thumb: "/shots/glu-study.jpg",
+    summary:
+      "Course notes and lesson study guides for Global Life University — Old and New Testament surveys and systematic theology, written to be read at a desk or from a pulpit.",
+    problem:
+      "Seminary material arrives as PDFs and lecture notes that are hard to review quickly and impossible to search when you're preparing to teach from them.",
+    approach: [
+      "Structured every course as cards with per-lesson progress and certificate state, so what's finished and what's outstanding is legible at a glance.",
+      "Wrote the type for scanning — warm, dense, high-contrast — because the reading happens in preparation, not leisure.",
+      "Added full-text search and a dark mode for late study.",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Python"],
+    metrics: [
+      { value: "6", label: "courses" },
+      { value: "36", label: "lesson guides" },
+    ],
+  },
+  {
+    slug: "trade-vision",
+    name: "Trade Vision",
+    kind: "Dual-book trading desk",
+    year: "2026",
+    accent: "#5eead4",
+    href: "https://trade.dongje.app",
+    summary:
+      "A command center for two books at once — PHP crypto on Coins.ph and USD equities on Gotrade — with a heads-up display, research journal, risk rails and catalyst tracking.",
+    problem:
+      "Running two books in two currencies across two brokers means the thing you most need — combined exposure, and whether a trade is permitted right now — is the thing no single app shows you.",
+    approach: [
+      "Built a HUD that reconciles both books into a combined NAV with live FX, while keeping each book's own currency native.",
+      "Modelled the desk as four roles — Scout, Analyst, Risk, Desk — so research, sizing and permission are separate decisions with their own tape.",
+      "Kept all desk state as typed JSON in git: no brokerage API, no credentials, every change reviewable as a diff.",
+    ],
+    stack: ["Next.js", "TypeScript", "Recharts", "shadcn/ui", "Zod"],
+    metrics: [
+      { value: "2", label: "books reconciled" },
+      { value: "0", label: "API keys held" },
+    ],
+  },
+  {
+    slug: "expenses",
+    name: "Aether Ledger",
+    kind: "Personal finance tracker",
+    year: "2026",
+    accent: "#a5b4fc",
+    href: "https://expenses.dongje.app",
+    summary:
+      "Statement-driven card tracking built around real payday cycles — what's due this 15th, what's overdue, and how the balance is actually trending.",
+    problem:
+      "Card apps show you a balance and a due date. They don't tell you what lands before your next payday, which is the only question that matters when you're planning a cycle.",
+    approach: [
+      "Modelled salary as landing on the 15th and 30th, then bucketed every statement minimum into the cycle it actually falls in.",
+      "Seeded statements of account as typed data, with browser-local flags for what's been paid — no backend, no bank credentials anywhere.",
+      "Added trends and insights views so month-over-month spend is comparable only once a card has two full cycles.",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    metrics: [
+      { value: "2", label: "pay cycles modelled" },
+      { value: "0", label: "bank credentials" },
+    ],
+  },
+  {
+    slug: "loans",
+    name: "Loan Management System",
+    kind: "Admin lending tool",
+    year: "2026",
+    accent: "#93c5fd",
+    href: "https://loans.dongje.app",
+    summary:
+      "An admin-gated tool for tracking borrowers, schedules and repayments — everything behind a single sign-in, because none of it is public data.",
+    problem:
+      "Informal lending gets tracked in notebooks and chat threads, where a missed payment is invisible until someone goes looking for it.",
+    approach: [
+      "Put the whole application behind an admin sign-in rather than exposing any borrower record publicly.",
+      "Built the schedule and repayment views on Radix primitives for accessible tables, dialogs and forms.",
+    ],
+    stack: ["Next.js", "TypeScript", "Radix UI", "Tailwind CSS"],
+    metrics: [
+      { value: "1", label: "admin role" },
+      { value: "100%", label: "behind auth" },
+    ],
   },
 ];
 

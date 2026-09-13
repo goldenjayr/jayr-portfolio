@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
@@ -163,6 +164,8 @@ export function FeaturedProject({ project, index }: { project: Project; index: n
 
 export function CompactProject({ project }: { project: Project }) {
   const { ref, onMove } = useSpotlight();
+  // The card as a whole opens the live site when there is one, else the source.
+  const primary = project.href ?? project.repo;
 
   return (
     <motion.div
@@ -174,8 +177,50 @@ export function CompactProject({ project }: { project: Project }) {
       viewport={{ once: true, margin: "-70px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       style={{ ["--accent" as string]: project.accent }}
-      className="group card relative overflow-hidden p-7 transition-colors duration-500 hover:border-line-bright"
+      className="group card relative flex flex-col overflow-hidden transition-colors duration-500 hover:border-line-bright"
     >
+      {/* Preview: a real screenshot where one exists, an accent wash where it doesn't */}
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-raised">
+        {project.thumb ? (
+          <Image
+            src={project.thumb}
+            alt={`${project.name} screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(120% 90% at 30% 0%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%), linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0))",
+            }}
+          />
+        )}
+        {!project.thumb && (
+          <div className="absolute inset-0 grid place-items-center px-6">
+            <span
+              className="font-display text-balance text-center text-2xl leading-tight italic opacity-70 sm:text-3xl"
+              style={{ color: project.accent }}
+            >
+              {project.name}
+            </span>
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+        {project.href && (
+          <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-line-bright bg-ink/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.12em] text-soft uppercase backdrop-blur-sm">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </span>
+            Live
+          </span>
+        )}
+      </div>
+
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -185,7 +230,7 @@ export function CompactProject({ project }: { project: Project }) {
         }}
       />
 
-      <div className="relative flex h-full flex-col">
+      <div className="relative flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-4">
           <span
             className="font-mono text-[11px] tracking-[0.16em] uppercase"
@@ -193,7 +238,7 @@ export function CompactProject({ project }: { project: Project }) {
           >
             {project.kind}
           </span>
-          {project.repo && (
+          {primary && (
             <ArrowUpRight
               size={16}
               className="shrink-0 text-mute transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-bright"
@@ -201,38 +246,53 @@ export function CompactProject({ project }: { project: Project }) {
           )}
         </div>
 
-        <h3 className="mt-4 text-xl font-medium tracking-tight text-bright">
+        <h3 className="mt-3 text-xl font-medium tracking-tight text-bright">
           {project.name}
         </h3>
         <p className="mt-3 flex-1 text-pretty text-sm leading-relaxed text-mute">
           {project.summary}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-1.5">
-          {project.stack.slice(0, 4).map((s) => (
+        <div className="mt-6 flex flex-wrap items-center gap-1.5">
+          {project.stack.slice(0, 3).map((t) => (
             <span
-              key={s}
+              key={t}
               className="rounded border border-line px-2 py-0.5 font-mono text-[10px] text-mute"
             >
-              {s}
+              {t}
             </span>
           ))}
-          {project.stack.length > 4 && (
+          {project.stack.length > 3 && (
             <span className="px-1 py-0.5 font-mono text-[10px] text-mute">
-              +{project.stack.length - 4}
+              +{project.stack.length - 3}
             </span>
+          )}
+          {project.href && project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer noopener"
+              onClick={(e) => e.stopPropagation()}
+              className="relative z-20 ml-auto font-mono text-[10px] tracking-wide text-mute uppercase transition-colors hover:text-gold"
+            >
+              Source
+            </a>
           )}
         </div>
       </div>
 
       {/* Overlay link keeps the whole card clickable without nesting a ref-typed anchor. */}
-      {project.repo && (
+      {primary && (
         <a
-          href={project.repo}
+          href={primary}
           target="_blank"
           rel="noreferrer noopener"
-          aria-label={`${project.name} — view source on GitHub`}
-          className="absolute inset-0 rounded-2xl"
+          aria-label={
+            project.href
+              ? `${project.name} — open live site`
+              : `${project.name} — view source on GitHub`
+          }
+          className="absolute inset-0 z-10 rounded-2xl"
         />
       )}
     </motion.div>

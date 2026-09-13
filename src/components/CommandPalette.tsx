@@ -12,8 +12,8 @@ const items: Item[] = [
   ...projects.map((p) => ({
     label: p.name,
     hint: p.kind,
-    href: p.repo ?? "#work",
-    external: Boolean(p.repo),
+    href: p.href ?? p.repo ?? "#work",
+    external: Boolean(p.href ?? p.repo),
   })),
   { label: "GitHub", hint: "goldenjayr", href: links.github, external: true },
   { label: "LinkedIn", hint: "Profile", href: links.linkedin, external: true },
