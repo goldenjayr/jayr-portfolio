@@ -192,11 +192,13 @@ export const projects: Project[] = [
       "Auto-detected the key colour from image corners, and applied a soft alpha ramp at edges to avoid the jagged outline that hard thresholding produces.",
       "Shipped it as both a bulk CLI and a small web UI with ZIP download for batch work.",
     ],
-    stack: ["Python", "Pillow", "NumPy", "Flask"],
+    stack: ["Python", "Pillow", "NumPy", "SciPy", "Flask"],
     metrics: [
       { value: "Interior", label: "regions preserved" },
       { value: "Anti-aliased", label: "edge quality" },
     ],
+    href: "https://bgremover.dongje.app",
+    thumb: "/shots/background-remover.jpg",
     repo: "https://github.com/goldenjayr/background-remover",
   },
   {
