@@ -313,6 +313,32 @@ export const projects: Project[] = [
       { value: "100%", label: "behind auth" },
     ],
   },
+  {
+    slug: "image-optimizer",
+    name: "Image Optimizer",
+    kind: "Bulk image pipeline",
+    year: "2026",
+    accent: "#a3e635",
+    href: "https://imgoptimizer.dongje.app",
+    thumb: "/shots/image-optimizer.jpg",
+    repo: "https://github.com/goldenjayr/image-optimizer",
+    summary:
+      "Bulk compression and format conversion across JPEG, PNG, WebP, AVIF, TIFF and HEIC — concurrent by default, and it never touches your originals unless you ask it to.",
+    problem:
+      "Optimisation tools make you pick a side: a CLI that's fast but scriptable-only, or a web tool that takes one file at a time and quietly overwrites what you gave it.",
+    approach: [
+      "Built the core on Sharp with p-limit bounding the concurrency, so a folder processes in parallel without the memory spike that unbounded Promise.all gives you.",
+      "Routed HEIC and HEIF through ImageMagick first — they're what phones actually produce, and the format most tools decline to open.",
+      "Made safe mode the default: optimised copies out, originals untouched, with replace as an explicit opt-in rather than a footgun.",
+      "Shipped the same engine as both a CLI and an Express web UI, with batch ZIP download and browser-side downscaling for anything over 4MB.",
+    ],
+    stack: ["Node.js", "Sharp", "Express", "ImageMagick", "Multer", "Archiver"],
+    metrics: [
+      { value: "6", label: "formats supported" },
+      { value: "24", label: "files per batch" },
+      { value: "0", label: "originals modified" },
+    ],
+  },
 ];
 
 export const experience = [

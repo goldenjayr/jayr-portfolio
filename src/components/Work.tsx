@@ -11,7 +11,7 @@ export default function Work() {
       <SectionHeading
         index="01"
         title="Systems I've shipped, and what they had to survive."
-        lead="Eleven projects, from a seven-service AI platform to a Python tool that fixes one specific bug everyone else ships. Open a case study for the decisions behind it, or open a live one and use it."
+        lead="Twelve projects, from a seven-service AI platform to a Python tool that fixes one specific bug everyone else ships. Open a case study for the decisions behind it, or open a live one and use it."
       />
 
       <div className="space-y-6">
