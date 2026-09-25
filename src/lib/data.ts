@@ -339,6 +339,29 @@ export const projects: Project[] = [
       { value: "0", label: "originals modified" },
     ],
   },
+  {
+    slug: "pickleball-court",
+    name: "Court / Cebu",
+    kind: "Build planning field guide",
+    year: "2026",
+    accent: "#34d399",
+    href: "https://pickleball.dongje.app",
+    thumb: "/shots/pickleball.jpg",
+    summary:
+      "A beginner's field guide to building one covered pickleball court for public play in Cebu — the space the game actually needs, the work that shapes the build, and the questions to take to a local contractor.",
+    problem:
+      "Court dimensions are easy to look up. The numbers that decide whether a site works at all — clear play area, roof span, and a realistic cost basis — are not, so first-time builders commit to a footprint before they know what it has to hold.",
+    approach: [
+      "Drew the layout to scale with the painted lines, the clear play area and the roof footprint as three separate shapes, because conflating them is the mistake that gets poured in concrete.",
+      "Wrote the budget section as a starting range rather than a quote, so the reader arrives at a contractor with questions instead of a number they will defend.",
+      "Cited sources throughout — the point is that a beginner can check the reasoning rather than take it on trust.",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "SVG"],
+    metrics: [
+      { value: "6", label: "guide sections" },
+      { value: "1", label: "court, planned properly" },
+    ],
+  },
 ];
 
 export const experience = [
